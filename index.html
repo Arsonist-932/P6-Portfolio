@@ -17,7 +17,83 @@
 
 <body>
 
+	<!-- Mode editor -->
+	<div class="edit-mode" style="display: none;">
+		<i class="fa-solid fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</div>
 
+	<!-- Modal  Admin-->
+	<aside class="modal-container" id="modal1" style="display: none;">
+		<div class="overlay modal-trigger"></div>
+
+		<div class="modal-wrapper">
+			<div class="closemodal-btn modal-trigger">
+				<i class="fa-solid fa-xmark fa-2xl"></i>
+			</div>
+
+			<h2 id="modal-title">Galerie Photo</h2>
+			<div class="modal-gallery" id="js-galleryModal"></div>
+			<p class="modal-succes"></p>
+
+			<hr>
+
+			<a href="#modal2" class="button-add"> Ajouter une Photo</a>
+		</div>
+	</aside>
+
+	<aside class="modal-container" id="modal2" style="display: none;">
+		<div class="overlay modal-trigger1"></div>
+
+		<div class="modal-wrapper">
+			<div href="" class=" js-return modal-trigger1">
+				<i class="fa-solid fa-arrow-left fa-2xl"></i>
+			</div>
+
+			<div class="closemodal-btn modal-trigger1">
+				<i class="fa-solid fa-xmark fa-2xl"></i>
+			</div>
+
+			<h2 id="modal-title">Ajout Photo</h2>
+
+			<form class="modal-form" id="js-modal-form" action="" method="post">
+				<div class="form-img">
+					<div class="icon">
+						<i class="fa-regular fa-image fa-2xl"></i>
+					</div>
+
+					<label for="photo">+ Ajouter une photo</label>
+					<input type="file" name="photo" id="photo" class="js-image">
+					<span>jpg,png : 4mo max</span>
+				</div>
+
+				<div class="form-options">
+					<div class="form-title">
+						<label for="titre">Titre</label>
+						<input type="text" id="titre">
+					</div>
+
+					<div class="form-categories">
+						<label for="categorie">Catégorie</label>
+						<select name="categorie" id="categorie" class="js-categoryId">
+							<option value=""></option>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hôtels & restaurants</option>
+						</select>
+					</div>
+
+				</div>
+
+				<p class="validate-form"></p>
+				<p class="error-form"></p>
+
+				<hr>
+
+				<input type="submit" id="button-form" value="Valider">
+			</form>
+		</div>
+	</aside>
 
 	<!-- Header -->
 	<header>
@@ -51,6 +127,13 @@
 
 		<!-- Gallery Section -->
 		<section id="portfolio">
+			<div class="portfolio-title">
+				<h2>Mes Projets</h2>
+				<div class="edit-link" style="display: none;">
+					<i class="fa-solid fa-pen-to-square"></i>
+					<a href="#modal1" class="modal-link"> modifier</a>
+				</div>
+			</div>
 
 			<!-- Filterbar -->
 			<div class="filterbar">
