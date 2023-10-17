@@ -4,12 +4,11 @@ let listCatName;
 // ** Requête API pour la génération des projets ** //
 const projectAPI = async () => {
   await fetch("http://localhost:5678/api/works")
-    .then((response) => {
-      return response.json();
-    })
+    .then((response) => { return response.json(); })
     .then((data) => {
       arrayGallery = data;
     });
+
   await fetch("http://localhost:5678/api/categories")
     .then((response) => {
       return response.json();
@@ -20,6 +19,7 @@ const projectAPI = async () => {
     })
     .then(() => {
       createGallery();
+      createProjectGallery()
     });
 };
 projectAPI();
@@ -84,7 +84,7 @@ const refreshPageAdmin = (tokenSession) => {
 }
 refreshPageAdmin(tokenSession);
 
-// ************************** Gestion de la Modal ************************** //
+// ************************** GESTION MODAL ************************** //
 
 // ****** Gestion d'ouverture de la modal Projet  ****** //
 const modal1 = document.getElementById("modal1");
@@ -121,3 +121,71 @@ window.addEventListener("keydown", (e) => {
     closeModalAdd(e);
   }
 });
+
+// *** Gestion d'ajouts des projet dans la modal ** //
+const createProjectGallery = () => {
+  const galleryModal = document.getElementById("js-galleryModal");
+  galleryModal.innerHTML = "";
+  arrayGallery.forEach((items) => {
+    galleryModal.insertAdjacentHTML(
+      "beforeend",
+      `<figure id="${items.category.name}">
+          <img src="${items.imageUrl}" alt="${items.title}">
+          <div id="${items.id}" class="trash">
+          <i  id="${items.id}" class="fa-regular fa-trash-can fa-xs"></i>
+          </div>
+        </figure>`
+    );
+  });
+
+  const iconeDelete = document.querySelectorAll(".trash").forEach((items) => {
+    items.addEventListener("click", deleteWorks);
+  })
+};
+
+// *** SUPPRESION DES PROJETS *** //
+async function deleteWorks(e) {
+  let id = e.target.id;
+  await fetch(`http://localhost:5678/api/works/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${tokenSession}`,
+    },
+  })
+    .then(async (response) => {
+      const messageSucces = document.querySelector(".modal-succes");
+      const messageErr = document.querySelector(".modal-error");
+
+      switch (response.status) {
+        case 204:
+          messageSucces.innerHTML = "Le Projet à été supprimé";
+          setTimeout(() => {
+            messageSucces.innerText = "";
+          }, 2000);
+          await projectAPI();
+          break;
+
+        case 401:
+          messageErr.innerHTML = "Vous n'êtes pas autorisé à supprimer le projet, Reconnectez-vous";
+          setTimeout(() => {
+            messageErr.innerText = "";
+            window.location.href = "login.html";
+          }, 2000);
+          break;
+
+        case 404:
+          messageErr.innerHTML =
+            "Une erreur est survenue, merci de ressayer";
+          setTimeout(() => {
+            messageErr.innerText = "";
+          }, 2000);
+
+        default:
+          throw new Error(`Réponse HTTP inattendue : ${response.status}`);
+      }
+    })
+    .catch((error) => {
+      console.error("Une erreur s'est produite :", error);
+    });
+};
+
