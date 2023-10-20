@@ -59,13 +59,12 @@
 
 			<form class="modal-form" id="js-modal-form" action="" method="post">
 				<div class="form-img">
-					<div class="icon">
+					<label for="photo" class="label-img">
 						<i class="fa-regular fa-image fa-2xl"></i>
-					</div>
-
-					<label for="photo">+ Ajouter une photo</label>
+						<span class="addpic-btn">+ Ajouter une photo </span>
+						<span class="span-txt">jpg, png : 4mo max</span>
+					</label>
 					<input type="file" name="photo" id="photo" class="js-image">
-					<span>jpg,png : 4mo max</span>
 				</div>
 
 				<div class="form-options">
@@ -90,7 +89,6 @@
 				<p class="error-form"></p>
 
 				<hr>
-
 				<input type="submit" id="button-form" value="Valider">
 			</form>
 		</div>
