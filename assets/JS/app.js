@@ -277,8 +277,7 @@ const addProjects = async () => {
             pError.innerHTML = ""
           }, 1500);
 
-        default:
-          throw new Error(`Réponse HTTP inattendue : ${response.status}`);
+        default: throw new Error(`Réponse HTTP inattendue : ${response.status}`);
       }
     })
     .catch((error) => {
@@ -303,7 +302,5 @@ const resetFormFields = () => {
   <span class="addpic-btn">+ Ajouter une photo </span>
   <span>jpg, png : 4mo max</span>`;
   btnAdd.classList.remove("active");
-  setTimeout(() => {
-    closeModalAdd();
-  }, 1500);
+  setTimeout(() => { closeModalAdd(); }, 1500);
 };
