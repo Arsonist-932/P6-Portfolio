@@ -226,16 +226,25 @@ hr {
 }
 
 .error-form,
-.validate-form {
+.validate-form,
+.error,
+.validate {
   text-align: center;
   font-size: 16px;
   font-weight: bold;
 }
 
-.validate-form {
+.validate-form,
+.validate {
   color: green;
 }
 
-.error-form {
+.error-form,
+.error {
   color: #ff0000;
+}
+
+.error,
+.validate {
+  padding-top: 20px;
 }

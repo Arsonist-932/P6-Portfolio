@@ -61,6 +61,38 @@ function filterbar() {
 }
 filterbar();
 
+// *** Gestion du formulaire de contact *** //
+const contactName = document.getElementById("name");
+const contactMail = document.getElementById("email");
+const contactMsg = document.getElementById("message");
+const error = document.querySelector(".error");
+const validate = document.querySelector(".validate");
+
+const VerificationFormContact = (e) => {
+  if (contactName.value === "" || contactMail.value === "" || contactMsg.value === "") {
+    error.innerHTML = "Merci de remplir tous les champs.";
+    setTimeout(() => {
+      error.innerHTML = "";
+      resetFormHome();
+    }, 2000);
+  };
+};
+const ValidationFormContact = (e) => {
+  if (contactName.value !== "" && contactMail.value !== "" && contactMsg.value !== "") {
+    validate.innerHTML = "Message envoyé";
+    setTimeout(() => {
+      validate.innerHTML = "";
+      resetFormHome();
+    }, 2000);
+  };
+};
+
+const formHome = document.querySelector(".contact-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  VerificationFormContact();
+  ValidationFormContact()
+});
+
 /// **********************************  PARTIE ADMIN ********************************** ///
 
 // On vérifie la présence du tocken, si il est différent de null
@@ -304,3 +336,10 @@ const resetFormFields = () => {
   btnAdd.classList.remove("active");
   setTimeout(() => { closeModalAdd(); }, 1500);
 };
+
+const resetFormHome = () => {
+  contactName.value = "";
+  contactMail.value = "";
+  contactMsg.value = "";
+};
+
